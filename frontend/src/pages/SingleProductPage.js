@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { useParams, useHistory } from 'react-router-dom'
-import { formatPrice } from '../utils/helpers'
+import { useParams, useNavigate } from "react-router-dom";
+import { formatPrice } from "../utils/helpers";
 import {
   Loading,
   Error,
@@ -10,43 +10,43 @@ import {
   AddToCart,
   Stars,
   PageHero,
-} from '../components'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import { fetchSingleProduct } from '../redux/products/products.action'
+} from "../components";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { fetchSingleProduct } from "../redux/products/products.action";
 
 const SingleProductPage = () => {
-  const dispatch = useDispatch()
-  const products = useSelector((state) => state.products)
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.products);
   const {
     single_product_loading: loading,
     single_product_error: error,
     single_product,
-  } = products
+  } = products;
 
-  const { id } = useParams()
-  const history = useHistory()
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchSingleProduct(id))
+    dispatch(fetchSingleProduct(id));
     // eslint-disable-next-line
-  }, [id])
+  }, [id]);
 
   useEffect(() => {
     // eslint-disable-next-line
     if (error) {
       setTimeout(() => {
-        history.push('/')
-      }, 3000)
+        navigate("/");
+      }, 3000);
     }
     // eslint-disable-next-line
-  }, [error])
+  }, [error]);
 
   if (loading) {
-    return <Loading />
+    return <Loading />;
   }
   if (error) {
-    return <Error />
+    return <Error />;
   }
   const {
     name,
@@ -58,31 +58,31 @@ const SingleProductPage = () => {
     company,
     images,
     id: sku,
-  } = single_product
-  
+  } = single_product;
+
   return (
     <Wrapper>
       <PageHero title={name} product={true} />
-      <div className='section section-center page'>
-        <Link to='/products' className='btn'>
+      <div className="section section-center page">
+        <Link to="/products" className="btn">
           Back to Products
         </Link>
-        <div className='product-center'>
+        <div className="product-center">
           <ProductImages images={images} />
-          <section className='content'>
+          <section className="content">
             <h2>{name}</h2>
             <Stars stars={stars} reviews={reviews} />
-            <h5 className='price'>{formatPrice(price)}</h5>
-            <p className='desc'>{description}</p>
-            <p className='info'>
+            <h5 className="price">{formatPrice(price)}</h5>
+            <p className="desc">{description}</p>
+            <p className="info">
               <span>Available : </span>
-              {stock > 0 ? 'In Stock' : 'out of stock'}
+              {stock > 0 ? "In Stock" : "out of stock"}
             </p>
-            <p className='info'>
+            <p className="info">
               <span>SKU : </span>
               {sku}
             </p>
-            <p className='info'>
+            <p className="info">
               <span>Brand : </span>
               {company}
             </p>
@@ -92,8 +92,8 @@ const SingleProductPage = () => {
         </div>
       </div>
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.main`
   .product-center {
@@ -127,6 +127,6 @@ const Wrapper = styled.main`
       font-size: 1.25rem;
     }
   }
-`
+`;
 
-export default SingleProductPage
+export default SingleProductPage;

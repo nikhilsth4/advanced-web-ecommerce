@@ -7,10 +7,11 @@ import {
   Elements,
   useElements,
 } from "@stripe/react-stripe-js";
-import axios from "axios";
+
+import stripeLibrary from "stripe";
 
 import { formatPrice } from "../utils/helpers";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { clearCart } from "../redux/cart/cart.action";
@@ -23,7 +24,7 @@ const CheckoutForm = () => {
   const cart = useSelector((state) => state.cart);
   const { user } = useAuth0();
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const { cart_items, total_amount, shipping_fee } = cart;
 
   const [succeeded, setSucceeded] = useState(false);
@@ -35,15 +36,24 @@ const CheckoutForm = () => {
   const elements = useElements();
 
   const createPaymentIntent = async () => {
+    const calculateOrderAmount = () => {
+      return shipping_fee + total_amount;
+    };
     try {
-      const { data } = await axios.post(
-        "/.netlify/functions/create-payment-intent",
-        JSON.stringify({ cart_items, shipping_fee, total_amount })
+      const stripeInstance = stripeLibrary(
+        process.env.REACT_APP_STRIPE_SECRET_KEY
       );
-      console.log({ data });
-      setClientSecret(data.clientSecret);
-    } catch (err) {
-      console.log(err.response);
+
+      const paymentIntent = await stripeInstance.paymentIntents.create({
+        amount: calculateOrderAmount(),
+        currency: "usd",
+      });
+      if (paymentIntent.client_secret)
+        setClientSecret(paymentIntent.client_secret);
+      console.log({ paymentIntent });
+      console.log({ clientSecret });
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
@@ -81,7 +91,7 @@ const CheckoutForm = () => {
       });
       setTimeout(() => {
         dispatch(clearCart());
-        history.push("/");
+        navigate("/");
       }, 10000);
     }
   };
