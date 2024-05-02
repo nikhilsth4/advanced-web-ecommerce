@@ -14,10 +14,20 @@ const getUserId = async (userId) => {
 
 router.get("/", async (req, res) => {
   try {
-    const userId = await getUserId(req.userId);
+    const orders = await Order.find({});
+    if (!orders) return res.status(404).send("cannot find");
+    res.status(201).send(orders);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.get("/:userId", async (req, res) => {
+  try {
+    const userId = await getUserId(req.params.userId);
     const orders = await Order.find({ user: userId._id });
     if (!orders) return res.status(404).send("cannot find");
-    res.send(orders);
+    res.status(201).send(orders);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

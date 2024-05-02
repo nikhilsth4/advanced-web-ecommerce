@@ -13,6 +13,7 @@ import {
   PrivateRoute,
   AuthWrapper,
 } from "./pages";
+import DashboardPage from "./pages/DashboardPage";
 
 function App() {
   const cart_items = useSelector((state) => state.cart.cart_items);
@@ -33,6 +34,9 @@ function App() {
           <Route exact path="/products/:id" element={<SingleProduct />} />
           <Route exact path="/checkout" element={<PrivateRoute />}>
             <Route exact path="/checkout" element={<Checkout />} />
+          </Route>
+          <Route exact path="/dashboard" element={<PrivateRoute />}>
+            <Route exact path="/dashboard" element={<DashboardPage />} />
           </Route>
           <Route path="*" element={Error} />
         </Routes>
