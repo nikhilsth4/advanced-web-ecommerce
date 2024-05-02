@@ -38,7 +38,7 @@ function EthereumCheckout() {
         const accounts = await web3.eth.getAccounts();
         const contract = new web3.eth.Contract(
           PaymentContract.abi,
-          "0xB5db48Ae17edfE8e7F09C1605Fe90ad616cD73a6"
+          "0x98b9009A18C5E56d60F105692D7D3cad7f656259"
         );
 
         console.log(process.env.DEPLOYED_CONTRACT_ADDRESS);
@@ -83,13 +83,13 @@ function EthereumCheckout() {
   return (
     <div>
       <button
-        className="button hero-btn py-5 px-8 font-bold text-lg disabled:bg-primary-light disabled:cursor-wait"
+        className="px-8 py-5 text-lg font-bold button hero-btn disabled:bg-primary-light disabled:cursor-wait"
         onClick={payWithEthereum}
         disabled={loading}
       >
         Pay with ether{" "}
         {loading && (
-          <AiOutlineLoading3Quarters className="animate-spin inline-block" />
+          <AiOutlineLoading3Quarters className="inline-block animate-spin" />
         )}
       </button>
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
