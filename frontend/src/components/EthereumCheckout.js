@@ -6,6 +6,7 @@ import { postOrder } from "../redux/order/order,action";
 import { useAuth0 } from "@auth0/auth0-react";
 import { clearCart } from "../redux/cart/cart.action";
 import { useNavigate } from "react-router-dom";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 function EthereumCheckout() {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ function EthereumCheckout() {
 
   const { cart_items, total_amount, shipping_fee } = cart;
   const calculateEther = () => {
-    const etherPrice = 30000; // Price of one unit of ether in dollars
+    const etherPrice = 300000; // Price of one unit of ether in dollars
     const total = shipping_fee + total_amount;
     const totalInEther = total / etherPrice;
     return totalInEther.toFixed(1);
@@ -28,6 +29,8 @@ function EthereumCheckout() {
 
   async function payWithEthereum() {
     setLoading(true);
+    setErrorMessage(null);
+
     try {
       if (window.ethereum) {
         const web3 = new Web3(window.ethereum);
@@ -52,14 +55,14 @@ function EthereumCheckout() {
           await postOrder({
             user: user.email,
             products: cart_items,
-            totalAmount: Number(calculateEther()),
+            totalAmount: shipping_fee + total_amount,
             shippingAddress: "USA",
             paymentMethod: "blockchain",
           });
           setTimeout(() => {
             dispatch(clearCart());
             navigate("/");
-          }, 1000);
+          }, 4000);
           console.log("Contribution successful!");
         } catch (error) {
           setErrorMessage(`Error contributing:${error?.innerError?.message}`);
@@ -80,12 +83,14 @@ function EthereumCheckout() {
   return (
     <div>
       <button
-        className="btn hero-btn"
+        className="button hero-btn py-5 px-8 font-bold text-lg disabled:bg-primary-light disabled:cursor-wait"
         onClick={payWithEthereum}
         disabled={loading}
       >
-        Pay with metamask <br />
-        {calculateEther()} ether
+        Pay with ether{" "}
+        {loading && (
+          <AiOutlineLoading3Quarters className="animate-spin inline-block" />
+        )}
       </button>
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       {succeeded && <p style={{ color: "green" }}>Payment Succeeded</p>}

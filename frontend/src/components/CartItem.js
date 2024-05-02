@@ -22,11 +22,11 @@ const CartItem = ({ id, image, name, color, price, amount }) => {
           <h5 className='name'>{name}</h5>
           <p className='color'>
             color : <span style={{ background: color }}></span>
-            <h5 className='price-small'>{formatPrice(price)}</h5>
+            <h5 className='price-small text-primary'>{formatPrice(price)}</h5>
           </p>
         </div>
       </div>
-      <h5 className='price'>{formatPrice(price)}</h5>
+      <h5 className='price text-primary'>{formatPrice(price)}</h5>
       <AmountButtons amount={amount} increase={increase} decrease={decrease} />
       <h5 className='subtotal'>{formatPrice(price * amount)}</h5>
       <button
@@ -111,7 +111,7 @@ const Wrapper = styled.article`
     background: transparent;
     border: transparent;
     letter-spacing: var(--spacing);
-    background: var(--clr-red-dark);
+    background: #CD2C2C;
     width: 1.5rem;
     height: 1.5rem;
     display: flex;
@@ -135,7 +135,7 @@ const Wrapper = styled.article`
     .price {
       display: block;
       font-size: 1rem;
-      color: var(--clr-primary-5);
+      ${"" /* color: var(--clr-primary-5); */}
       font-weight: 400;
     }
     .name {
@@ -174,6 +174,6 @@ const Wrapper = styled.article`
       }
     }
   }
-`
+`;
 
 export default CartItem

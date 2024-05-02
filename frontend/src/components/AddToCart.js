@@ -61,7 +61,7 @@ const AddToCart = ({ product }) => {
         />
         <Link
           to='/cart'
-          className='btn'
+          className='button mt-3'
           onClick={() => dispatch(addToCart(id, mainColor, amount, product))}
         >
           Add to cart

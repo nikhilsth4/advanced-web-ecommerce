@@ -30,19 +30,19 @@ const CartButtons = () => {
     <Wrapper className="cart-btn-wrapper">
       <Link
         to="/cart"
-        className="cart-btn"
+        className="cart-btn text-white hover:text-primary"
         onClick={() => dispatch(closeSideBar())}
       >
         Cart{" "}
         <span className="cart-container">
           <FaShoppingCart />
-          <span className="cart-value">{cart.total_items}</span>
+          <span className="cart-value bg-persian-red">{cart.total_items}</span>
         </span>{" "}
       </Link>
       {isAuthenticated ? (
         <button
           type="button"
-          className="auth-btn"
+          className="auth-btn text-white hover:text-primary"
           onClick={() => {
             logout({ returnTo: window.location.origin });
             dispatch(clearCart());
@@ -51,7 +51,11 @@ const CartButtons = () => {
           Logout <FaUserMinus />
         </button>
       ) : (
-        <button type="button" className="auth-btn" onClick={onLoginClick}>
+        <button
+          type="button"
+          className="auth-btn text-white hover:text-primary"
+          onClick={onLoginClick}
+        >
           Login <FaUserPlus />
         </button>
       )}
@@ -66,10 +70,8 @@ const Wrapper = styled.div`
   width: 225px;
 
   .cart-btn {
-    color: var(--clr-grey-1);
     font-size: 1.5rem;
     letter-spacing: var(--spacing);
-    color: var(--clr-grey-1);
     display: flex;
 
     align-items: center;
@@ -87,7 +89,6 @@ const Wrapper = styled.div`
     position: absolute;
     top: -10px;
     right: -16px;
-    background: var(--clr-primary-5);
     width: 16px;
     height: 16px;
     display: flex;
@@ -105,7 +106,6 @@ const Wrapper = styled.div`
     border-color: transparent;
     font-size: 1.5rem;
     cursor: pointer;
-    color: var(--clr-grey-1);
     letter-spacing: var(--spacing);
     svg {
       margin-left: 5px;

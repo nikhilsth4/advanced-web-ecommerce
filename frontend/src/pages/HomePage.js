@@ -5,7 +5,7 @@ const HomePage = () => {
   const { user } = useAuth0();
   console.log({ user });
   return (
-    <main>
+    <main className=" bg-[rgb(25,25,25)]">
       <Hero />
       <FeaturedProducts />
       <Services />

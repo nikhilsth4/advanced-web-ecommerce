@@ -1,37 +1,37 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
 const Contact = () => {
   return (
     <Wrapper>
-      <div className='section-center'>
-        <h3>Join out newsletter and get 20% off</h3>
-        <div className='content'>
-          <p>
+      <div className="section-center">
+        <h3 className="text-alabaster">Join out newsletter and get 20% off</h3>
+        <div className="content">
+          <p className="text-alto">
             It is a long established fact that a reader will be distracted by
             the readable content of a page when looking at its layout. The point
             of using Lorem Ipsum is that it has a more-or-less normal
           </p>
           <form
-            action='https://formspree.io/f/mdoygbpr'
-            method='POST'
-            className='contact-form'
+            action="https://formspree.io/f/mdoygbpr"
+            method="POST"
+            className="contact-form"
           >
             <input
-              type='email'
-              className='form-input'
-              placeholder='enter email'
-              name='_replyto'
+              type="email"
+              className="form-input"
+              placeholder="enter email"
+              name="_replyto"
             />
-            <button type='submit' className='submit-btn'>
+            <button type="submit" className="submit-btn button">
               subscribe
             </button>
           </form>
         </div>
       </div>
     </Wrapper>
-  )
-}
+  );
+};
 const Wrapper = styled.section`
   padding: 5rem 0;
   h3 {
@@ -40,7 +40,6 @@ const Wrapper = styled.section`
   p {
     line-height: 2;
     max-width: 45em;
-    color: var(--clr-grey-5);
   }
   .contact-form {
     width: 90vw;
@@ -70,12 +69,10 @@ const Wrapper = styled.section`
     text-transform: capitalize;
   }
   .submit-btn {
-    background: var(--clr-primary-5);
     text-transform: capitalize;
     letter-spacing: var(--spacing);
     cursor: pointer;
     transition: var(--transition);
-    color: var(--clr-black);
   }
   .submit-btn:hover {
     color: var(--clr-white);
@@ -95,6 +92,6 @@ const Wrapper = styled.section`
   @media (min-width: 1280px) {
     padding: 15rem 0;
   }
-`
+`;
 
-export default Contact
+export default Contact;

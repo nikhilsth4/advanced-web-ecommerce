@@ -1,14 +1,21 @@
-import React from 'react'
-import styled from 'styled-components'
-import { formatPrice } from '../utils/helpers'
-import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { useAuth0 } from '@auth0/auth0-react'
+import React from "react";
+import styled from "styled-components";
+import { formatPrice } from "../utils/helpers";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useAuth0 } from "@auth0/auth0-react";
 
-const CartTotals = () => {
-  const cart = useSelector((state) => state.cart)
-  const { total_amount, shipping_fee } = cart
-  const { loginWithRedirect, isAuthenticated } = useAuth0()
+const CartTotals = ({ isCart = false }) => {
+  const cart = useSelector((state) => state.cart);
+  const { total_amount, shipping_fee } = cart;
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
+
+  const calculateEther = () => {
+    const etherPrice = 300000; // Price of one unit of ether in dollars
+    const total = shipping_fee + total_amount;
+    const totalInEther = total / etherPrice;
+    return totalInEther.toFixed(1);
+  };
 
   return (
     <Wrapper>
@@ -22,27 +29,30 @@ const CartTotals = () => {
           </p>
           <hr />
           <h4>
-            order total :{' '}
+            order total :{" "}
             <span>{formatPrice(total_amount + shipping_fee)}</span>
+            <br />
+            <span className="inline-block mt-2">{calculateEther()} ether</span>
           </h4>
         </article>
-        {isAuthenticated ? (
-          <Link to='/checkout' className='btn'>
-            Checkout
-          </Link>
-        ) : (
-          <button
-            type='button'
-            onClick={() => loginWithRedirect()}
-            className='btn'
-          >
-            login
-          </button>
-        )}
+        {isCart &&
+          (isAuthenticated ? (
+            <Link to="/checkout" className="button">
+              Checkout
+            </Link>
+          ) : (
+            <button
+              type="button"
+              onClick={() => loginWithRedirect()}
+              className="button"
+            >
+              login
+            </button>
+          ))}
       </div>
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.section`
   margin-top: 3rem;
@@ -68,12 +78,12 @@ const Wrapper = styled.section`
   @media (min-width: 776px) {
     justify-content: flex-end;
   }
-  .btn {
+  .button {
     width: 100%;
     margin-top: 1rem;
     text-align: center;
-    font-weight: 700;
+    font-weight: 600;
   }
-`
+`;
 
-export default CartTotals
+export default CartTotals;

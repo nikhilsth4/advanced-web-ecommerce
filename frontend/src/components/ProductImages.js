@@ -44,7 +44,7 @@ const Wrapper = styled.section`
     }
   }
   .active {
-    box-shadow: 0px 0px 0px 2px var(--clr-primary-5);
+    box-shadow: 0px 0px 0px 2px #D87D4A;
   }
   @media (max-width: 576px) {
     .main {
@@ -66,6 +66,6 @@ const Wrapper = styled.section`
       }
     }
   }
-`
+`;
 
 export default ProductImages

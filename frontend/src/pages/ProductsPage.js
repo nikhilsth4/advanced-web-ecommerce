@@ -33,9 +33,9 @@ const ProductsPage = () => {
   }
 
   return (
-    <main>
+    <main className='bg-seashell'>
       <PageHero title='products' />
-      <Wrapper className='page'>
+      <Wrapper className='page py-12 px-auto'>
         <div className='section-center products'>
           <Filters />
           <div>
@@ -52,7 +52,7 @@ const Wrapper = styled.div`
   .products {
     display: grid;
     gap: 3rem 1.5rem;
-    margin: 4rem auto;
+    ${'' /* margin: 4rem auto; */}
   }
   @media (min-width: 768px) {
     .products {

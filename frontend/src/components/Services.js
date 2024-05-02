@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
-import { services } from '../utils/constants'
+import React from "react";
+import styled from "styled-components";
+import { services } from "../utils/constants";
 
 const Services = () => {
   return (
-    <Wrapper>
-      <div className='section-center'>
-        <article className='header'>
+    <Wrapper className="">
+      <div className="section-center">
+        <article className="header">
           <h3>
             Custom furniture <br />
             built only for you
@@ -17,27 +17,27 @@ const Services = () => {
             of using Lorem Ipsum is that it has a more-or-less normal
           </p>
         </article>
-        <div className='services-center'>
+        <div className="services-center">
           {services.map((service) => {
-            const { id, icon, title, text } = service
+            const { id, icon, title, text } = service;
             return (
-              <article key={id} className='service'>
-                <span className='icon'>{icon}</span>
+              <article key={id} className="service">
+                <span className="icon">{icon}</span>
                 <h4>{title}</h4>
                 <p>{text}</p>
               </article>
-            )
+            );
           })}
         </div>
       </div>
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.section`
   h3,
   h4 {
-    color: var(--clr-primary-1);
+    color: black;
   }
   padding: 5rem 0;
 
@@ -96,5 +96,5 @@ const Wrapper = styled.section`
       transform: translateY(5rem);
     }
   }
-`
-export default Services
+`;
+export default Services;

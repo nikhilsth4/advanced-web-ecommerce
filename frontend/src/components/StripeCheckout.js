@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { clearCart } from "../redux/cart/cart.action";
 import { postOrder } from "../redux/order/order,action";
+import CartTotals from "./CartTotals";
 
 const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
@@ -85,14 +86,14 @@ const CheckoutForm = () => {
       await postOrder({
         user: user.email,
         products: cart_items,
-        totalAmount: shipping_fee,
+        totalAmount: shipping_fee + total_amount,
         shippingAddress: "USA",
         paymentMethod: "credit_card",
       });
       setTimeout(() => {
         dispatch(clearCart());
         navigate("/");
-      }, 10000);
+      }, 4000);
     }
   };
 
@@ -122,11 +123,7 @@ const CheckoutForm = () => {
           <h4>Redirecting to home page</h4>
         </article>
       ) : (
-        <article>
-          <h4>Hello , {user && user.name}</h4>
-          <p>Your total is {formatPrice(shipping_fee + total_amount)}</p>
-          <p>Test Card Number: 4242 4242 4242 4242</p>
-        </article>
+        <></>
       )}
       <form id="payment-form" onSubmit={handleSubmit}>
         <CardElement

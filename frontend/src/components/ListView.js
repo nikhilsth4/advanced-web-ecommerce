@@ -1,29 +1,29 @@
-import React from 'react'
-import styled from 'styled-components'
-import { formatPrice } from '../utils/helpers'
-import { Link } from 'react-router-dom'
+import React from "react";
+import styled from "styled-components";
+import { formatPrice } from "../utils/helpers";
+import { Link } from "react-router-dom";
 const ListView = ({ products }) => {
   return (
     <Wrapper>
       {products?.map((product) => {
-        const { image, name, price, id, description } = product
+        const { image, name, price, id, description } = product;
         return (
           <article key={id}>
             <img src={image} alt={name} />
             <div>
               <h4>{name}</h4>
-              <h5 className='price'>{formatPrice(price)}</h5>
+              <h5 className="price text-primary">{formatPrice(price)}</h5>
               <p>{description.substring(0, 150)}...</p>
-              <Link to={`/products/${id}`} className='btn'>
+              <Link to={`/products/${id}`} className="button">
                 Details
               </Link>
             </div>
           </article>
-        )
+        );
       })}
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.section`
   display: grid;
@@ -42,15 +42,14 @@ const Wrapper = styled.section`
     margin-bottom: 0.5rem;
   }
   .price {
-    color: var(--clr-primary-6);
     margin-bottom: 0.75rem;
   }
   p {
     max-width: 45em;
     margin-bottom: 1rem;
   }
-  .btn {
-    font-size: 0.5rem;
+  .button {
+    font-size: 0.8rem;
     padding: 0.25rem 0.5rem;
   }
   @media (min-width: 992px) {
@@ -61,6 +60,6 @@ const Wrapper = styled.section`
       align-items: center;
     }
   }
-`
+`;
 
-export default ListView
+export default ListView;

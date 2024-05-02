@@ -1,39 +1,39 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import CartColumns from './CartColumns'
-import CartItem from './CartItem'
-import CartTotals from './CartTotals'
-import { clearCart } from '../redux/cart/cart.action'
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import CartColumns from "./CartColumns";
+import CartItem from "./CartItem";
+import CartTotals from "./CartTotals";
+import { clearCart } from "../redux/cart/cart.action";
 
 const CartContent = () => {
-  const dispatch = useDispatch()
-  const cart = useSelector((state) => state.cart)
-  const { cart_items } = cart
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+  const { cart_items } = cart;
   return (
-    <Wrapper className='section section-center'>
+    <Wrapper className="section section-center">
       <CartColumns />
       {cart_items.map((item) => {
-        return <CartItem key={item.id} {...item} />
+        return <CartItem key={item.id} {...item} />;
       })}
       <hr />
-      <div className='link-container'>
-        <Link to='/products' className='link-btn'>
+      <div className="link-container">
+        <Link to="/products" className="button">
           continue shopping
         </Link>
         <button
-          type='button'
-          className='link-btn clear-btn'
+          type="button"
+          className="link-btn clear-btn"
           onClick={() => dispatch(clearCart())}
         >
           Clear shopping cart
         </button>
       </div>
-      <CartTotals />
+      <CartTotals isCart />
     </Wrapper>
-  )
-}
+  );
+};
 const Wrapper = styled.section`
   .link-container {
     display: flex;
@@ -55,5 +55,5 @@ const Wrapper = styled.section`
   .clear-btn {
     background: var(--clr-black);
   }
-`
-export default CartContent
+`;
+export default CartContent;
