@@ -2,16 +2,16 @@ import React, { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
 import "chartjs-adapter-date-fns";
 
-const OrdersTrendChart = ({ orders, userId }) => {
+const OrdersTrendChart = ({ userOrders }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
     // Filter orders for the specific user
-    const userOrders = orders.filter((order) => order.user === userId);
+    // const userOrders = orders.filter((order) => order.user === userId);
 
     // Group orders by date and count the number of orders for each day
-    const ordersByDay = userOrders.reduce((acc, order) => {
-      const date = new Date(order.orderDate);
+    const ordersByDay = userOrders?.reduce((acc, order) => {
+      const date = new Date(order?.orderDate);
       const formattedDate = date.toISOString().split("T")[0]; // Format date to ISO 8601
       acc[formattedDate] = (acc[formattedDate] || 0) + 1;
       return acc;
@@ -75,7 +75,7 @@ const OrdersTrendChart = ({ orders, userId }) => {
         myChart.destroy();
       };
     }
-  }, [orders, userId]);
+  }, [userOrders]);
 
   return <canvas ref={chartRef} />;
 };

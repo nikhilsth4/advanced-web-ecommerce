@@ -1,16 +1,16 @@
 import React, { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
 
-const PaymentMethodPieChart = ({ orders, userId }) => {
+const PaymentMethodPieChart = ({ userOrders }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
-    const userOrders = orders.filter((order) => order.user === userId);
+    // const userOrders = orders.filter((order) => order.user === userId);
 
     let creditCardCount = 0;
     let blockchainCount = 0;
 
-    userOrders.forEach((order) => {
+    userOrders?.forEach((order) => {
       if (order.paymentMethod === "credit_card") {
         creditCardCount++;
       } else if (order.paymentMethod === "blockchain") {
@@ -48,7 +48,7 @@ const PaymentMethodPieChart = ({ orders, userId }) => {
         myChart.destroy();
       };
     }
-  }, [orders, userId]);
+  }, [userOrders]);
 
   return <canvas ref={chartRef} />;
 };
