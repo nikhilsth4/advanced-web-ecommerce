@@ -10,13 +10,11 @@ import {
 
 import stripeLibrary from "stripe";
 
-import { formatPrice } from "../utils/helpers";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { clearCart } from "../redux/cart/cart.action";
 import { postOrder } from "../redux/order/order,action";
-import CartTotals from "./CartTotals";
 
 const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
@@ -138,17 +136,21 @@ const CheckoutForm = () => {
         </button>
 
         {error && (
-          <div className="card-error" role="alert">
+          <div className="text-red-500 card-error" role="alert">
             {error}
           </div>
         )}
 
-        <p className={succeeded ? "result-message" : "result-message hidden"}>
-          Payment succeeded, see the result in your
-          <a href={"https://dashboard.stripe.com/test/payments"}>
+        <p
+          className={`${
+            succeeded ? "result-message" : "result-message hidden"
+          } text-green text-sm text-green-700`}
+        >
+          Payment succeeded
+          {/* <a href={"https://dashboard.stripe.com/test/payments"}>
             Stripe dashboard
           </a>
-          Refresh the page to pay again
+          Refresh the page to pay again */}
         </p>
       </form>
     </div>
@@ -181,7 +183,7 @@ const Wrapper = styled.section`
     padding: 12px;
     border: 1px solid rgba(50, 50, 93, 0.1);
     max-height: 44px;
-    font-size: 16px;
+    font-size: 16px;ta
     width: 100%;
     background: white;
     box-sizing: border-box;

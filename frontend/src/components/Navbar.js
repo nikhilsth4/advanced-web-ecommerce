@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch } from "react-redux";
 
 import styled from "styled-components";
-import logo from "../assets/logo.svg";
 import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { links } from "../utils/constants";
@@ -21,7 +20,7 @@ const Nav = () => {
         <div className="nav-header">
           <Link to="/">
             {/* <img src={logo} alt='Comfy Sloth' /> */}
-            <h1 className="text-white text-3xl font-bold lowercase">
+            <h1 className="text-3xl font-bold text-white lowercase">
               ecommerce
             </h1>
           </Link>

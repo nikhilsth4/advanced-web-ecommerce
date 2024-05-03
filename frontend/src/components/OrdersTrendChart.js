@@ -17,8 +17,6 @@ const OrdersTrendChart = ({ userOrders }) => {
       return acc;
     }, {});
 
-    console.log({ ordersByDay });
-
     // Extract dates and order counts
     const dates = Object.keys(ordersByDay);
     const orderCounts = Object.values(ordersByDay);

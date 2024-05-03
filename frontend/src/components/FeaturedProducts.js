@@ -17,11 +17,7 @@ const FeaturedProducts = () => {
     // eslint-disable-next-line
   }, []);
 
-  const {
-    products_loading: loading,
-    products_error: error,
-    featured_products: featured,
-  } = products;
+  const { products_loading: loading, products_error: error } = products;
 
   if (loading) {
     return <Loading />;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Web3 from "web3";
 import PaymentContract from "../ethereum/build/PaymentContract.json"; // Import the compiled contract ABI
 import { useDispatch, useSelector } from "react-redux";
@@ -93,7 +93,9 @@ function EthereumCheckout() {
         )}
       </button>
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-      {succeeded && <p style={{ color: "green" }}>Payment Succeeded</p>}
+      {succeeded && (
+        <p className="mt-4 text-green-500 text-md">Payment Succeeded</p>
+      )}
     </div>
   );
 }

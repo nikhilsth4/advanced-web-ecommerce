@@ -1,5 +1,5 @@
 import { POST_USER_EMAIL_ERROR, POST_USER_EMAIL_SUCCESS } from "./types";
-import axios from "axios";
+// import axios from "axios";
 
 export const postUser = (email) => async (dispatch) => {
   dispatch({ type: POST_USER_EMAIL_SUCCESS });
